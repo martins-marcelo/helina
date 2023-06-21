@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.martins.helina.ObjectNotFoundException;
 import com.martins.helina.adapter.db.domain.mapper.EstabelecimentoMapper;
 import com.martins.helina.entrypoint.dto.EstabelecimentoDTO;
+import com.martins.helina.exceptions.ObjectNotFoundException;
 import com.martins.helina.repository.EstabelecimentoRepository;
 
 import lombok.RequiredArgsConstructor;

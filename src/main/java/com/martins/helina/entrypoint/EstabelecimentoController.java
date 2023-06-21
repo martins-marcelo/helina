@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.martins.helina.ObjectNotFoundException;
 import com.martins.helina.entrypoint.dto.EstabelecimentoDTO;
+import com.martins.helina.exceptions.ObjectNotFoundException;
 import com.martins.helina.usecase.CadastrarEstabelecimentoUseCase;
 import com.martins.helina.usecase.RecuperarDetalhesEstabelecimentoUseCase;
 import com.martins.helina.usecase.RecuperarEstabelecimentosUseCase;

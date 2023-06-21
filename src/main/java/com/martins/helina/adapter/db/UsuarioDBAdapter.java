@@ -4,10 +4,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import com.martins.helina.ObjectNotFoundException;
 import com.martins.helina.adapter.db.domain.Usuario;
 import com.martins.helina.adapter.db.domain.mapper.UsuarioMapper;
 import com.martins.helina.entrypoint.dto.UsuarioDTO;
+import com.martins.helina.exceptions.ObjectNotFoundException;
 import com.martins.helina.repository.UsuarioRepository;
 
 import lombok.RequiredArgsConstructor;
