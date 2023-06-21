@@ -1,0 +1,20 @@
+aws:
+  accessKeyId: AKIA34QUXYIUDPGKDN4Q
+  secretAccessKey: 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
+  region: sa-east-1
+s3:
+  bucketName: usuario-profile-picture
+spring:
+  datasource:
+    password: root
+    url: jdbc:postgresql://localhost:5432/oqtph
+    username: root
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+topic:
+  arn: arn:aws:sns:sa-east-1:817161028136:notifica-reserva

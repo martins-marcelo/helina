@@ -1,0 +1,18 @@
+package com.martins.helina.entrypoint.dto;
+
+import lombok.Builder;
+import lombok.Data;
+
+@Data @Builder
+public class UsuarioDTO {
+	
+	private Long idUsuario;
+
+	private String nomeUsuario;
+	
+	private String emailUsuario;
+	
+	private EnderecoDTO endereco;
+	
+	private byte[] fotoPerfil;
+}
