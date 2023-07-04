@@ -6,9 +6,9 @@ s3:
   bucketName: usuario-profile-picture
 spring:
   datasource:
+    password: root
     url: jdbc:postgresql://localhost:5432/oqtph
     username: root
-    password: root
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:

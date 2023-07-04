@@ -12,5 +12,7 @@ public interface ImagemS3Client {
 	void sendFotoPerfil(String objectKey, File fotoPerfil) throws IOException;
 	
 	byte[] recuperarFotoPerfil(Long idUsuario);
+	
+	byte[] recuperarImagemEstabelecimento(Long idEstabelecimento, Boolean isBanner);
 
 }
