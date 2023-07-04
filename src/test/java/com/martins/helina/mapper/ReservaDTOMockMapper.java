@@ -3,7 +3,7 @@ package com.martins.helina.mapper;
 import com.martins.helina.entrypoint.dto.ReservaDTO;
 import com.martins.helina.entrypoint.dto.enums.StatusReservaEnum;
 
-public class ReservaDTOMapper {
+public class ReservaDTOMockMapper {
 
     public ReservaDTO reservaDTOMapperStatusAceita(){
         return ReservaDTO.builder()

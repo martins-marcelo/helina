@@ -6,13 +6,12 @@ import com.martins.helina.adapter.sns.ReservaSNSClient;
 import com.martins.helina.entrypoint.dto.EstabelecimentoDTO;
 import com.martins.helina.entrypoint.dto.ReservaDTO;
 import com.martins.helina.entrypoint.dto.enums.StatusReservaEnum;
-import com.martins.helina.mapper.EstabelecimentoDTOMapper;
-import com.martins.helina.mapper.ReservaDTOMapper;
+import com.martins.helina.mapper.EstabelecimentoDTOMockMapper;
+import com.martins.helina.mapper.ReservaDTOMockMapper;
 import com.martins.helina.usecase.ReservarUseCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -40,8 +39,8 @@ public class ReservarUseCaseTest {
     }
     @Test
     public void executeStatusReservaAceitaTipoReservaAutoTest() throws Exception {
-        ReservaDTOMapper reservaDTOMapper = new ReservaDTOMapper();
-        EstabelecimentoDTOMapper estabelecimento = new EstabelecimentoDTOMapper();
+        ReservaDTOMockMapper reservaDTOMapper = new ReservaDTOMockMapper();
+        EstabelecimentoDTOMockMapper estabelecimento = new EstabelecimentoDTOMockMapper();
         EstabelecimentoDTO estabelecimentoDTO = estabelecimento.estabelecimentoDTOMapperTipoReservaAuto();
         ReservaDTO reservaDTO = reservaDTOMapper.reservaDTOMapperStatusAceita();
         when(estabelecimentoClient.recuperarEstabelecimento(reservaDTO.getIdEstabelecimento()))
@@ -57,8 +56,8 @@ public class ReservarUseCaseTest {
 
     @Test
     public void executeStatusReservaSolicitadoTipoReservaDiferenteDeAutoTest() throws Exception {
-        ReservaDTOMapper reservaDTOMapper = new ReservaDTOMapper();
-        EstabelecimentoDTOMapper estabelecimento = new EstabelecimentoDTOMapper();
+        ReservaDTOMockMapper reservaDTOMapper = new ReservaDTOMockMapper();
+        EstabelecimentoDTOMockMapper estabelecimento = new EstabelecimentoDTOMockMapper();
         EstabelecimentoDTO estabelecimentoDTO = estabelecimento.estabelecimentoDTOMapperTipoReservaAvaliar();
         ReservaDTO reservaDTO = reservaDTOMapper.reservaDTOMapperStatusSolicitada();
         when(estabelecimentoClient.recuperarEstabelecimento(reservaDTO.getIdEstabelecimento()))
