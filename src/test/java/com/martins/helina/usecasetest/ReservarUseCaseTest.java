@@ -56,7 +56,7 @@ public class ReservarUseCaseTest {
     }
 
     @Test
-    public void executeStatusReservaSolicitadoTipoReservaDiferenteDeAuto() throws Exception {
+    public void executeStatusReservaSolicitadoTipoReservaDiferenteDeAutoTest() throws Exception {
         ReservaDTOMapper reservaDTOMapper = new ReservaDTOMapper();
         EstabelecimentoDTOMapper estabelecimento = new EstabelecimentoDTOMapper();
         EstabelecimentoDTO estabelecimentoDTO = estabelecimento.estabelecimentoDTOMapperTipoReservaAvaliar();
