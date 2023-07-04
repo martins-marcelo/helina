@@ -1,5 +1,6 @@
 package com.martins.helina.usecase;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import com.martins.helina.adapter.db.EstabelecimentoDBClient;
@@ -11,11 +12,13 @@ import com.martins.helina.entrypoint.dto.enums.StatusReservaEnum;
 import com.martins.helina.entrypoint.dto.enums.TipoReservaEnum;
 
 @Component
+@RequiredArgsConstructor
 public class ReservarUseCase {
-	
-	EstabelecimentoDBClient estabelecimentoClient;
-	ReservaDBClient reservaDBClient;
-	ReservaSNSClient reservaSNSClient;
+
+	private final EstabelecimentoDBClient estabelecimentoClient;
+	private final ReservaDBClient reservaDBClient;
+	private final ReservaSNSClient reservaSNSClient;
+
 	
 	public ReservaDTO execute(ReservaDTO reservaDTO) throws Exception{
 	
