@@ -10,4 +10,5 @@ public class HelinaApplication {
 		SpringApplication.run(HelinaApplication.class, args);
 	}
 
+
 }

@@ -53,10 +53,32 @@ public class ImagemS3Adapter implements ImagemS3Client{
         }
         return null;
 	}
+
+	@Override
+	public byte[] recuperarImagemEstabelecimento(Long idEstabelecimento, Boolean isBanner) {
+		var nameFile = isBanner ? "banner" : "icon";
+		String objectKey = "estabelecimentos/" + idEstabelecimento + "/" + nameFile + ".jpg";
+        GetObjectRequest request = GetObjectRequest.builder()
+                .bucket(bucketName)
+                .key(objectKey)
+                .build();
+        try {
+            var resp = s3Client.getObject(request);
+            byte[] fotoPerfilBytes = resp.readAllBytes();
+            return fotoPerfilBytes;
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
+        return null;
+	}
+	
+	
 	
 	@Override
 	public File convertMultipartFileToFile(MultipartFile file) throws IOException {
         return new File(file.getOriginalFilename());
     }
+
+	
 	
 }
