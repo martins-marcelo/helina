@@ -2,19 +2,23 @@ package com.martins.helina.entrypoint;
 
 import java.util.List;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.martins.helina.entrypoint.dto.EstabelecimentoDTO;
 import com.martins.helina.exceptions.ObjectNotFoundException;
+import com.martins.helina.usecase.AtualizarEstabelecimentoUseCase;
 import com.martins.helina.usecase.CadastrarEstabelecimentoUseCase;
 import com.martins.helina.usecase.RecuperarDetalhesEstabelecimentoUseCase;
 import com.martins.helina.usecase.RecuperarEstabelecimentosUseCase;
+import com.martins.helina.usecase.RecuperarImagemEstabelecimentoUseCase;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,6 +32,10 @@ public class EstabelecimentoController {
 	private final RecuperarDetalhesEstabelecimentoUseCase recuperarDetalhesEstabelecimentoUseCase;
 	
 	private final RecuperarEstabelecimentosUseCase recuperarEstabelecimentosUseCase;
+	
+	private final AtualizarEstabelecimentoUseCase atualizarEstabelecimentoUseCase;
+	
+	private final RecuperarImagemEstabelecimentoUseCase recuperarImagemEstabelecimentoUseCase;
 
 	@PostMapping("/cadastrar")
 	public ResponseEntity<EstabelecimentoDTO> cadastrarEstabelecimento(@RequestBody EstabelecimentoDTO estabelecimentoDTO) {
@@ -46,5 +54,17 @@ public class EstabelecimentoController {
 		var estabelecimentos = recuperarEstabelecimentosUseCase.execute();
 		return ResponseEntity.ok().body(estabelecimentos);
 	}
+	
+	@PutMapping("/atualizar")
+	public ResponseEntity<EstabelecimentoDTO> atualizarEstabelecimento(@RequestBody EstabelecimentoDTO estabelecimentoDTO) throws ObjectNotFoundException{
+		var estabelecimento = atualizarEstabelecimentoUseCase.execute(estabelecimentoDTO);
+		return ResponseEntity.ok().body(estabelecimento);
+	}
+	
+	@GetMapping(value = "/imagem/{idEstabelecimento}/{flBanner}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> recuperarFotoPerfil(@PathVariable Long idEstabelecimento, @PathVariable String flBanner) {
+        var imagem = recuperarImagemEstabelecimentoUseCase.execute(idEstabelecimento, flBanner);
+        return ResponseEntity.ok().body(imagem);
+    }
 
 }

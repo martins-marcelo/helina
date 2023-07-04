@@ -2,12 +2,13 @@ package com.martins.helina.adapter.db.domain;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import com.martins.helina.entrypoint.dto.enums.StatusReservaEnum;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
