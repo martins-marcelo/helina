@@ -16,6 +16,8 @@ public class ReservaDTO {
 	
 	private Integer quantidade;
 	
+	private Integer solicitante;
+	
 	private StatusReservaEnum statusReserva;
 
 }

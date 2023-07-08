@@ -11,7 +11,7 @@ public class ReservaSNSAdapter implements ReservaSNSClient{
 	
 	private SnsClient snsClient;
 	
-	private static final String MSG_RESERVA = "Nova reserva recebida pelo seu estabelecimento!";
+	private static final String MSG_RESERVA = "Nova reserva recebida para seu estabelecimento!";
 	
 	@Value("${topic.arn}")
 	private String topicArn;
