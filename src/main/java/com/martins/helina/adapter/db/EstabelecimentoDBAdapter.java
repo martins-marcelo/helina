@@ -12,8 +12,8 @@ import com.martins.helina.adapter.db.domain.mapper.CardapioMapper;
 import com.martins.helina.adapter.db.domain.mapper.CronogramaMapper;
 import com.martins.helina.adapter.db.domain.mapper.EnderecoMapper;
 import com.martins.helina.adapter.db.domain.mapper.EstabelecimentoMapper;
-import com.martins.helina.entrypoint.dto.EstabelecimentoDTO;
-import com.martins.helina.exceptions.ObjectNotFoundException;
+import com.martins.helina.controller.dto.EstabelecimentoDTO;
+import com.martins.helina.exception.ObjectNotFoundException;
 import com.martins.helina.repository.EstabelecimentoRepository;
 
 import lombok.RequiredArgsConstructor;

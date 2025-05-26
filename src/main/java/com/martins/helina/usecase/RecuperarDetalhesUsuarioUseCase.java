@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.martins.helina.adapter.db.UsuarioDBClient;
 import com.martins.helina.adapter.s3.ImagemS3Client;
-import com.martins.helina.entrypoint.dto.UsuarioDTO;
+import com.martins.helina.controller.dto.UsuarioDTO;
 
 import lombok.RequiredArgsConstructor;
 

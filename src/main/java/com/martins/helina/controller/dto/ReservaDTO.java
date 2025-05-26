@@ -1,6 +1,6 @@
-package com.martins.helina.entrypoint.dto;
+package com.martins.helina.controller.dto;
 
-import com.martins.helina.entrypoint.dto.enums.StatusReservaEnum;
+import com.martins.helina.controller.dto.enums.StatusReservaEnum;
 
 import lombok.Builder;
 import lombok.Data;

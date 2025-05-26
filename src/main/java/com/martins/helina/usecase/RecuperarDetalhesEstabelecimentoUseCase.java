@@ -3,8 +3,8 @@ package com.martins.helina.usecase;
 import org.springframework.stereotype.Service;
 
 import com.martins.helina.adapter.db.EstabelecimentoDBClient;
-import com.martins.helina.entrypoint.dto.EstabelecimentoDTO;
-import com.martins.helina.exceptions.ObjectNotFoundException;
+import com.martins.helina.controller.dto.EstabelecimentoDTO;
+import com.martins.helina.exception.ObjectNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  helina:
+    build: .
+    container_name: helina-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/helina
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    networks:
+      - helina-network
+
+  db:
+    image: postgres:16
+    container_name: helina-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: oqtph
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - helina-network
+
+volumes:
+  postgres-data:
+
+networks:
+  helina-network:

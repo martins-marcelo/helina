@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.martins.helina.adapter.db.domain.Reserva;
 import com.martins.helina.adapter.db.domain.mapper.ReservaMapper;
-import com.martins.helina.entrypoint.dto.ReservaDTO;
-import com.martins.helina.exceptions.ObjectNotFoundException;
+import com.martins.helina.controller.dto.ReservaDTO;
+import com.martins.helina.exception.ObjectNotFoundException;
 import com.martins.helina.repository.ReservaRepository;
 
 @Service

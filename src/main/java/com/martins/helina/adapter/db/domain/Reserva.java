@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.martins.helina.entrypoint.dto.enums.StatusReservaEnum;
+import com.martins.helina.controller.dto.enums.StatusReservaEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.martins.helina.exceptions;
+package com.martins.helina.exception;
 
 public class ObjectNotFoundException extends RuntimeException{
 

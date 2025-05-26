@@ -1,4 +1,4 @@
-package com.martins.helina.entrypoint.dto.enums;
+package com.martins.helina.controller.dto.enums;
 
 import lombok.Getter;
 

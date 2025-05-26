@@ -3,7 +3,7 @@ package com.martins.helina.adapter.db.domain.mapper;
 import java.util.stream.Collectors;
 
 import com.martins.helina.adapter.db.domain.Cardapio;
-import com.martins.helina.entrypoint.dto.CardapioDTO;
+import com.martins.helina.controller.dto.CardapioDTO;
 
 public class CardapioMapper {
 

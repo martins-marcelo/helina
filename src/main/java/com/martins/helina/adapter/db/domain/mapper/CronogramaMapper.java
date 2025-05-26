@@ -1,7 +1,7 @@
 package com.martins.helina.adapter.db.domain.mapper;
 
 import com.martins.helina.adapter.db.domain.Cronograma;
-import com.martins.helina.entrypoint.dto.CronogramaDTO;
+import com.martins.helina.controller.dto.CronogramaDTO;
 
 public class CronogramaMapper {
 

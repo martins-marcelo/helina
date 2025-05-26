@@ -3,7 +3,7 @@ package com.martins.helina.adapter.db.domain.mapper;
 import java.util.Optional;
 
 import com.martins.helina.adapter.db.domain.Reserva;
-import com.martins.helina.entrypoint.dto.ReservaDTO;
+import com.martins.helina.controller.dto.ReservaDTO;
 
 public class ReservaMapper {
 	

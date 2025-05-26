@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 import com.martins.helina.adapter.db.EstabelecimentoDBClient;
 import com.martins.helina.adapter.db.ReservaDBClient;
 import com.martins.helina.adapter.sns.ReservaSNSClient;
-import com.martins.helina.entrypoint.dto.EstabelecimentoDTO;
-import com.martins.helina.entrypoint.dto.ReservaDTO;
-import com.martins.helina.entrypoint.dto.enums.StatusReservaEnum;
-import com.martins.helina.entrypoint.dto.enums.TipoReservaEnum;
+import com.martins.helina.controller.dto.EstabelecimentoDTO;
+import com.martins.helina.controller.dto.ReservaDTO;
+import com.martins.helina.controller.dto.enums.StatusReservaEnum;
+import com.martins.helina.controller.dto.enums.TipoReservaEnum;
 
 @Component
 @RequiredArgsConstructor

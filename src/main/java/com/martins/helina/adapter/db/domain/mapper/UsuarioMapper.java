@@ -1,7 +1,7 @@
 package com.martins.helina.adapter.db.domain.mapper;
 
 import com.martins.helina.adapter.db.domain.Usuario;
-import com.martins.helina.entrypoint.dto.UsuarioDTO;
+import com.martins.helina.controller.dto.UsuarioDTO;
 
 public class UsuarioMapper {
 

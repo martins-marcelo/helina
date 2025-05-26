@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 
 import com.martins.helina.adapter.db.ReservaDBClient;
 import com.martins.helina.adapter.sns.ReservaSNSClient;
-import com.martins.helina.entrypoint.dto.ReservaDTO;
-import com.martins.helina.entrypoint.dto.enums.Perfil;
+import com.martins.helina.controller.dto.ReservaDTO;
+import com.martins.helina.controller.dto.enums.Perfil;
 
 import lombok.RequiredArgsConstructor;
 

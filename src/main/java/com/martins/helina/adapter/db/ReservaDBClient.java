@@ -2,7 +2,7 @@ package com.martins.helina.adapter.db;
 
 import java.util.List;
 
-import com.martins.helina.entrypoint.dto.ReservaDTO;
+import com.martins.helina.controller.dto.ReservaDTO;
 
 public interface ReservaDBClient {
 	

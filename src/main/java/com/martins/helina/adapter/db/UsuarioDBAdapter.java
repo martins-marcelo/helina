@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 import com.martins.helina.adapter.db.domain.Usuario;
 import com.martins.helina.adapter.db.domain.mapper.UsuarioMapper;
-import com.martins.helina.entrypoint.dto.UsuarioDTO;
-import com.martins.helina.exceptions.ObjectNotFoundException;
+import com.martins.helina.controller.dto.UsuarioDTO;
+import com.martins.helina.exception.ObjectNotFoundException;
 import com.martins.helina.repository.UsuarioRepository;
 
 import lombok.RequiredArgsConstructor;

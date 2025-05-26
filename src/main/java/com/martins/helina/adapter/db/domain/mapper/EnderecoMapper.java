@@ -1,7 +1,7 @@
 package com.martins.helina.adapter.db.domain.mapper;
 
 import com.martins.helina.adapter.db.domain.Endereco;
-import com.martins.helina.entrypoint.dto.EnderecoDTO;
+import com.martins.helina.controller.dto.EnderecoDTO;
 
 public class EnderecoMapper {
 	

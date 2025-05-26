@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.martins.helina.adapter.db.EstabelecimentoDBClient;
-import com.martins.helina.entrypoint.dto.EstabelecimentoDTO;
+import com.martins.helina.controller.dto.EstabelecimentoDTO;
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,7 +1,7 @@
 package com.martins.helina.mapper;
 
-import com.martins.helina.entrypoint.dto.EstabelecimentoDTO;
-import com.martins.helina.entrypoint.dto.enums.TipoReservaEnum;
+import com.martins.helina.controller.dto.EstabelecimentoDTO;
+import com.martins.helina.controller.dto.enums.TipoReservaEnum;
 
 public class EstabelecimentoDTOMockMapper {
 

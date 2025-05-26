@@ -3,7 +3,7 @@ package com.martins.helina.adapter.db.domain.mapper;
 import java.util.stream.Collectors;
 
 import com.martins.helina.adapter.db.domain.Estabelecimento;
-import com.martins.helina.entrypoint.dto.EstabelecimentoDTO;
+import com.martins.helina.controller.dto.EstabelecimentoDTO;
 
 public class EstabelecimentoMapper {
 	

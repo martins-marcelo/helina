@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.martins.helina.adapter.db.domain.Endereco;
 import com.martins.helina.adapter.db.domain.Usuario;
-import com.martins.helina.entrypoint.dto.enums.Perfil;
+import com.martins.helina.controller.dto.enums.Perfil;
 import com.martins.helina.repository.UsuarioRepository;
 
 @Service

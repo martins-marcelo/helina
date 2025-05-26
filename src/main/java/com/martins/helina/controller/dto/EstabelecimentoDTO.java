@@ -1,4 +1,4 @@
-package com.martins.helina.entrypoint.dto;
+package com.martins.helina.controller.dto;
 
 import java.util.List;
 

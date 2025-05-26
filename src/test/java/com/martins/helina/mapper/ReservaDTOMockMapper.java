@@ -1,7 +1,7 @@
 package com.martins.helina.mapper;
 
-import com.martins.helina.entrypoint.dto.ReservaDTO;
-import com.martins.helina.entrypoint.dto.enums.StatusReservaEnum;
+import com.martins.helina.controller.dto.ReservaDTO;
+import com.martins.helina.controller.dto.enums.StatusReservaEnum;
 
 public class ReservaDTOMockMapper {
 

@@ -1,4 +1,4 @@
-package com.martins.helina.entrypoint;
+package com.martins.helina.controller;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.martins.helina.entrypoint.dto.ReservaDTO;
+import com.martins.helina.controller.dto.ReservaDTO;
 import com.martins.helina.usecase.AtualizarStatusReservaUseCase;
 import com.martins.helina.usecase.ReservarUseCase;
 import com.martins.helina.usecase.ReservasPorClienteUseCase;

@@ -1,4 +1,4 @@
-package com.martins.helina.entrypoint;
+package com.martins.helina.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.martins.helina.entrypoint.dto.UsuarioDTO;
+import com.martins.helina.controller.dto.UsuarioDTO;
 import com.martins.helina.usecase.AlterarImagemUseCase;
 import com.martins.helina.usecase.CadastrarUsuarioUseCase;
 import com.martins.helina.usecase.RecuperarDetalhesUsuarioUseCase;

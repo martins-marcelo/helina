@@ -1,4 +1,4 @@
-package com.martins.helina.entrypoint.dto.enums;
+package com.martins.helina.controller.dto.enums;
 
 public enum Perfil {
 	ADMIN(1, "ROLE_ADMIN"),
