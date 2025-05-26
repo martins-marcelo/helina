@@ -2,22 +2,24 @@ package com.martins.helina.usecase;
 
 import org.springframework.stereotype.Service;
 
-import com.martins.helina.adapter.db.ReservaDBClient;
 import com.martins.helina.adapter.sns.ReservaSNSClient;
 import com.martins.helina.controller.dto.ReservaDTO;
-import com.martins.helina.controller.dto.enums.Perfil;
+import com.martins.helina.service.ReservaService;
+import com.martins.helina.service.UsuarioService;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AtualizarStatusReservaUseCase {
-	private final ReservaDBClient reservaDBClient;
+	private final ReservaService reservaService;
 	private final ReservaSNSClient reservaSNSClient;
+	private final UsuarioService usuarioService;
 
-	public ReservaDTO execute(ReservaDTO reservaDTO) throws Exception {
-		var resposta = reservaDBClient.atualizarStatusReserva(reservaDTO);
-		if (Perfil.toEnum(reservaDTO.getSolicitante()).equals(Perfil.CLIENTE_USER)) 
+	public Boolean execute(ReservaDTO reservaDTO) throws Exception {
+		var resposta = reservaService.atualizarStatusReserva(reservaDTO);
+		Boolean isCliente = usuarioService.isUsuarioCliente(reservaDTO.getIdUsuario());
+		if (isCliente) 
 			reservaSNSClient.notificarReservaEstabelecimento();
 		else
 			reservaSNSClient.notificarStatusReservaCliente();

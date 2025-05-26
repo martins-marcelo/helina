@@ -1,13 +1,54 @@
 package com.martins.helina.repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.martins.helina.adapter.db.domain.Usuario;
+import com.martins.helina.domain.Usuario;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
-	
-	Optional<Usuario> findByEmailUsuario(String email);
+import lombok.RequiredArgsConstructor;
+import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
+import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
+import software.amazon.awssdk.enhanced.dynamodb.Key;
+import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
+import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 
+@Repository
+@RequiredArgsConstructor
+public class UsuarioRepository {
+
+    private final DynamoDbEnhancedClient enhancedClient;
+
+    private DynamoDbTable<Usuario> getTable() {
+        return enhancedClient.table("Usuario", TableSchema.fromBean(Usuario.class));
+    }
+
+    public Optional<Usuario> findByEmail(String email) {
+        return StreamSupport.stream(
+                getTable()
+                    .index("email-index")
+                    .query(r -> r.queryConditional(QueryConditional.keyEqualTo(k -> k.partitionValue(email))))
+                    .spliterator(),
+                false)
+            .flatMap(page -> page.items().stream())
+            .findFirst();
+    }
+
+    public void save(Usuario usuario) {
+        getTable().putItem(usuario);
+    }
+
+    public Usuario findById(String id) {
+        return getTable().getItem(Key.builder().partitionValue(id).build());
+    }
+
+    public void deleteById(String id) {
+        getTable().deleteItem(Key.builder().partitionValue(id).build());
+    }
+
+    public List<Usuario> findAll() {
+        return getTable().scan().items().stream().toList();
+    }
 }

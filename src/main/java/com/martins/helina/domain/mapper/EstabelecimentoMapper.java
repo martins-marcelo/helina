@@ -1,9 +1,9 @@
-package com.martins.helina.adapter.db.domain.mapper;
+package com.martins.helina.domain.mapper;
 
 import java.util.stream.Collectors;
 
-import com.martins.helina.adapter.db.domain.Estabelecimento;
 import com.martins.helina.controller.dto.EstabelecimentoDTO;
+import com.martins.helina.domain.Estabelecimento;
 
 public class EstabelecimentoMapper {
 	
@@ -14,23 +14,25 @@ public class EstabelecimentoMapper {
 	public static Estabelecimento fromDTOToEntity(EstabelecimentoDTO estabelecimentoDTO) {
 		return Estabelecimento.builder()
 				.cnpj(estabelecimentoDTO.getCnpj())
-				.idEstabelecimento(estabelecimentoDTO.getIdEstabelecimento())
+				.id(estabelecimentoDTO.getId())
 				.nomeFantasia(estabelecimentoDTO.getNomeFantasia())
 				.razaoSocial(estabelecimentoDTO.getRazaoSocial())
 				.tipoReserva(estabelecimentoDTO.getTipoReserva())
 				.totalVagas(estabelecimentoDTO.getTotalVagas())
+				.reservaAutomatica(estabelecimentoDTO.getReservaAutomatica())
 				.cardapio(CardapioMapper.fromDTOToEntity(estabelecimentoDTO.getCardapio()))
 				.diasAbertura(estabelecimentoDTO.getDiasAbertura().stream()
 						.map(CronogramaMapper::fromDTOToEntity)
 						.collect(Collectors.toList()))
 				.endereco(EnderecoMapper.fromDTOToEntity(estabelecimentoDTO.getEndereco()))
+				.reservas(estabelecimentoDTO.getReservas().stream().map(ReservaMapper::fromDTOToEntity).collect(Collectors.toList()))
 				.build();
 	}
 
 	public static EstabelecimentoDTO fromEntityToDTO(Estabelecimento estabelecimento) {
 		return EstabelecimentoDTO.builder()
 				.cnpj(estabelecimento.getCnpj())
-				.idEstabelecimento(estabelecimento.getIdEstabelecimento())
+				.id(estabelecimento.getId())
 				.nomeFantasia(estabelecimento.getNomeFantasia())
 				.razaoSocial(estabelecimento.getRazaoSocial())
 				.tipoReserva(estabelecimento.getTipoReserva())

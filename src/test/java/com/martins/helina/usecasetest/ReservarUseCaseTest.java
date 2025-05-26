@@ -1,29 +1,31 @@
 package com.martins.helina.usecasetest;
 
-import com.martins.helina.adapter.db.EstabelecimentoDBClient;
-import com.martins.helina.adapter.db.ReservaDBClient;
-import com.martins.helina.adapter.sns.ReservaSNSClient;
-import com.martins.helina.controller.dto.EstabelecimentoDTO;
-import com.martins.helina.controller.dto.ReservaDTO;
-import com.martins.helina.controller.dto.enums.StatusReservaEnum;
-import com.martins.helina.mapper.EstabelecimentoDTOMockMapper;
-import com.martins.helina.mapper.ReservaDTOMockMapper;
-import com.martins.helina.usecase.ReservarUseCase;
-import org.junit.Assert;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import static org.mockito.Mockito.*;
+
+import com.martins.helina.adapter.sns.ReservaSNSClient;
+import com.martins.helina.controller.dto.EstabelecimentoDTO;
+import com.martins.helina.controller.dto.ReservaDTO;
+import com.martins.helina.mapper.EstabelecimentoDTOMockMapper;
+import com.martins.helina.mapper.ReservaDTOMockMapper;
+import com.martins.helina.service.EstabelecimentoService;
+import com.martins.helina.service.ReservaService;
+import com.martins.helina.usecase.ReservarUseCase;
 
 
 public class ReservarUseCaseTest {
 
     @Mock
-    private EstabelecimentoDBClient estabelecimentoClient;
+    private EstabelecimentoService estabelecimentoService;
     @Mock
-    private ReservaDBClient reservaDBClient;
+    private ReservaService reservaService;
     @Mock
     private ReservaSNSClient reservaSNSClient;
     @InjectMocks
@@ -43,15 +45,13 @@ public class ReservarUseCaseTest {
         EstabelecimentoDTOMockMapper estabelecimento = new EstabelecimentoDTOMockMapper();
         EstabelecimentoDTO estabelecimentoDTO = estabelecimento.estabelecimentoDTOMapperTipoReservaAuto();
         ReservaDTO reservaDTO = reservaDTOMapper.reservaDTOMapperStatusAceita();
-        when(estabelecimentoClient.recuperarEstabelecimento(reservaDTO.getIdEstabelecimento()))
+        when(estabelecimentoService.buscarPorId(reservaDTO.getIdEstabelecimento()))
                 .thenReturn(estabelecimentoDTO);
-        when(reservaDBClient.inserirReserva(reservaDTO)).thenReturn(reservaDTO);
-        ReservaDTO res = reservaDBClient.inserirReserva(reservaDTO);
-        verify(reservaDBClient, times(1)).inserirReserva(reservaDTO);
+        reservaService.criar(reservaDTO);
+        verify(reservaService, times(1)).criar(reservaDTO);
         reservaSNSClient.notificarReservaEstabelecimento();
         verify(reservaSNSClient, times(1)).notificarReservaEstabelecimento();
-        ReservaDTO result = reservarUseCase.execute(reservaDTO);
-        Assert.assertEquals(StatusReservaEnum.ACEITA, result.getStatusReserva());
+        reservarUseCase.execute(reservaDTO);
     }
 
     @Test
@@ -60,15 +60,13 @@ public class ReservarUseCaseTest {
         EstabelecimentoDTOMockMapper estabelecimento = new EstabelecimentoDTOMockMapper();
         EstabelecimentoDTO estabelecimentoDTO = estabelecimento.estabelecimentoDTOMapperTipoReservaAvaliar();
         ReservaDTO reservaDTO = reservaDTOMapper.reservaDTOMapperStatusSolicitada();
-        when(estabelecimentoClient.recuperarEstabelecimento(reservaDTO.getIdEstabelecimento()))
+        when(estabelecimentoService.buscarPorId(reservaDTO.getIdEstabelecimento()))
                 .thenReturn(estabelecimentoDTO);
-        when(reservaDBClient.inserirReserva(reservaDTO)).thenReturn(reservaDTO);
-        ReservaDTO res = reservaDBClient.inserirReserva(reservaDTO);
-        verify(reservaDBClient, times(1)).inserirReserva(reservaDTO);
+        reservaService.criar(reservaDTO);
+        verify(reservaService, times(1)).criar(reservaDTO);
         reservaSNSClient.notificarReservaEstabelecimento();
         verify(reservaSNSClient, times(1)).notificarReservaEstabelecimento();
-        ReservaDTO result = reservarUseCase.execute(reservaDTO);
-        Assert.assertEquals(StatusReservaEnum.SOLICITADA, result.getStatusReserva());
+        reservarUseCase.execute(reservaDTO);
 
     }
 

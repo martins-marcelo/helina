@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.martins.helina.adapter.db.domain.Endereco;
-import com.martins.helina.adapter.db.domain.Usuario;
 import com.martins.helina.controller.dto.enums.Perfil;
+import com.martins.helina.domain.Endereco;
+import com.martins.helina.domain.Usuario;
 import com.martins.helina.repository.UsuarioRepository;
 
 @Service
@@ -24,20 +24,20 @@ public class DBService {
 	
 	public void instantiateTestDatabase() throws ParseException {
 		Usuario u0 = Usuario.builder()
-				.emailUsuario("bfmarcelo1@gmail.com")
-				.senhaUsuario(encoder.encode("123"))
-				.nomeUsuario("Celo")
+				.email("bfmarcelo1@gmail.com")
+				.senha(encoder.encode("123"))
+				.nome("Celo")
 				.endereco(Endereco.builder()
 						.cep("689685")
 						.cidade("Rio Branco")
 						.estado("Acre")
 						.complemento("Aculá")
-						.logradouro("Rua do Sol")
+						.rua("Rua do Sol")
 						.numero("666A")
 						.build())
 				.perfis(Set.of(Perfil.ADMIN.getCodigo()))
 				.build();
-		Optional<Usuario> verify = userRepo.findByEmailUsuario(u0.getEmailUsuario());
+		Optional<Usuario> verify = userRepo.findByEmail(u0.getEmail());
 		if(verify.isEmpty())
 			userRepo.save(u0);
 	}

@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.martins.helina.adapter.db.domain.Usuario;
 import com.martins.helina.controller.dto.enums.Perfil;
+import com.martins.helina.domain.Usuario;
 import com.martins.helina.repository.UsuarioRepository;
 import com.martins.helina.security.UserSS;
 
@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Optional<Usuario> usuario = repo.findByEmailUsuario(email);
+		Optional<Usuario> usuario = repo.findByEmail(email);
 		if(usuario.isEmpty()) {
 			throw new UsernameNotFoundException(email);
 		}
@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 					Perfil.toEnum(x))
 				.collect(Collectors.toSet());
 		
-		return new UserSS(usuario.get().getIdUsuario(), usuario.get().getEmailUsuario(), usuario.get().getSenhaUsuario(), perfis);
+		return new UserSS(usuario.get().getId(), usuario.get().getEmail(), usuario.get().getSenha(), perfis);
 	}
 
 }

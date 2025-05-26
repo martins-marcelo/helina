@@ -2,8 +2,8 @@ package com.martins.helina.usecase;
 
 import org.springframework.stereotype.Service;
 
-import com.martins.helina.adapter.db.UsuarioDBClient;
 import com.martins.helina.controller.dto.UsuarioDTO;
+import com.martins.helina.service.UsuarioService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -11,10 +11,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CadastrarUsuarioUseCase {
 	
-	private final UsuarioDBClient usuarioClient;
+	private final UsuarioService service;
 	
-	public UsuarioDTO execute(UsuarioDTO usuarioDTO) throws Exception {
-		return usuarioClient.inserirUsuario(usuarioDTO);
+	public void execute(UsuarioDTO usuarioDTO) throws Exception {
+		service.criar(usuarioDTO);
 		
 	}
 }

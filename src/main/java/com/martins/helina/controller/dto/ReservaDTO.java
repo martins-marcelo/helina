@@ -7,17 +7,11 @@ import lombok.Data;
 
 @Data @Builder
 public class ReservaDTO {
-	
-	private Long idReserva;
-	
-	private Long idUsuario;
-	
-	private Long idEstabelecimento;
-	
-	private Integer quantidade;
-	
-	private Integer solicitante;
-	
-	private StatusReservaEnum statusReserva;
-
+private String idReserva;
+    private String idUsuario;
+    private String idEstabelecimento;
+    private String nomeUsuario;
+    private String dataHoraReserva;
+    private Integer quantidadePessoas;
+    private StatusReservaEnum status;
 }

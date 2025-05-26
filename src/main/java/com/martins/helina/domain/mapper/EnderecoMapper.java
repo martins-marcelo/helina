@@ -1,7 +1,7 @@
-package com.martins.helina.adapter.db.domain.mapper;
+package com.martins.helina.domain.mapper;
 
-import com.martins.helina.adapter.db.domain.Endereco;
 import com.martins.helina.controller.dto.EnderecoDTO;
+import com.martins.helina.domain.Endereco;
 
 public class EnderecoMapper {
 	
@@ -11,8 +11,8 @@ public class EnderecoMapper {
 				.cidade(dto.getCidade())
 				.complemento(dto.getComplemento())
 				.estado(dto.getEstado())
-				.idEndereco(dto.getIdEndereco())
-				.logradouro(dto.getLogradouro())
+				.rua(dto.getRua())
+				.bairro(dto.getBairro())
 				.numero(dto.getNumero())
 				.build();
 	}
@@ -23,8 +23,8 @@ public class EnderecoMapper {
 				.cidade(endereco.getCidade())
 				.complemento(endereco.getComplemento())
 				.estado(endereco.getEstado())
-				.idEndereco(endereco.getIdEndereco())
-				.logradouro(endereco.getLogradouro())
+				.rua(endereco.getRua())
+				.bairro(endereco.getBairro())
 				.numero(endereco.getNumero())
 				.build();
 	}

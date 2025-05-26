@@ -6,12 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data @Builder
-public class CardapioDTO {
-	
-	private Long idCardapio;
-	
-	private Long idEstabelecimento;
-	
-	private List<ItemCardapioDTO> itensCardapio;
+public class CardapioDTO {	
+	private List<ItemCardapioDTO> itens;
 
 }

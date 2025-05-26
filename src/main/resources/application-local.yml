@@ -1,6 +1,6 @@
 aws:
-  accessKeyId: AKIA34QUXYIUDPGKDN4Q
-  secretAccessKey: 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
+  accessKeyId: 
+  secretAccessKey: 
   region: sa-east-1
 s3:
   bucketName: usuario-profile-picture

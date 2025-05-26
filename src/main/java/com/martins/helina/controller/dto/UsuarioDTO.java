@@ -5,12 +5,12 @@ import lombok.Data;
 
 @Data @Builder
 public class UsuarioDTO {
-	
-	private Long idUsuario;
 
-	private String nomeUsuario;
-	
-	private String emailUsuario;
+	private String id;
+    private String nome;
+    private String email;
+    private String senha;
+    private String telefone;
 	
 	private EnderecoDTO endereco;
 	

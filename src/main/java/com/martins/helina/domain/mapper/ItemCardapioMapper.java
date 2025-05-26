@@ -1,25 +1,23 @@
-package com.martins.helina.adapter.db.domain.mapper;
+package com.martins.helina.domain.mapper;
 
-import com.martins.helina.adapter.db.domain.ItemCardapio;
 import com.martins.helina.controller.dto.ItemCardapioDTO;
+import com.martins.helina.domain.ItemCardapio;
 
 public class ItemCardapioMapper {
 
 	public static ItemCardapio fromDTOToEntity(ItemCardapioDTO itemCardapioDTO) {
 		return ItemCardapio.builder()
-				.idCardapio(itemCardapioDTO.getIdCardapio())
-				.idItem(itemCardapioDTO.getIdItem())
-				.nmItem(itemCardapioDTO.getNmItem())
+				.nome(itemCardapioDTO.getNome())
 				.preco(itemCardapioDTO.getPreco())
+				.descricao(itemCardapioDTO.getDescricao())
 				.build();
 	}
 
 	public static ItemCardapioDTO fromEntityToDTO(ItemCardapio itemCardapio) {
 		return ItemCardapioDTO.builder()
-				.idCardapio(itemCardapio.getIdCardapio())
-				.idItem(itemCardapio.getIdItem())
-				.nmItem(itemCardapio.getNmItem())
+				.nome(itemCardapio.getNome())
 				.preco(itemCardapio.getPreco())
+				.descricao(itemCardapio.getDescricao())
 				.build();
 	}
 

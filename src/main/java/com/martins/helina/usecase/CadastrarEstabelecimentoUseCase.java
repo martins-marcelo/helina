@@ -2,8 +2,8 @@ package com.martins.helina.usecase;
 
 import org.springframework.stereotype.Service;
 
-import com.martins.helina.adapter.db.EstabelecimentoDBClient;
 import com.martins.helina.controller.dto.EstabelecimentoDTO;
+import com.martins.helina.service.EstabelecimentoService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -11,10 +11,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CadastrarEstabelecimentoUseCase {
 	
-	private final EstabelecimentoDBClient estabelecimentoDBClient;
+	private final EstabelecimentoService service;
 	
-	public EstabelecimentoDTO execute(EstabelecimentoDTO estabelecimentoDTO) {
-		return estabelecimentoDBClient.cadastrarEstabelecimento(estabelecimentoDTO);
+	public void execute(EstabelecimentoDTO estabelecimentoDTO) {
+		service.criar(estabelecimentoDTO);
 		
 	}
 }

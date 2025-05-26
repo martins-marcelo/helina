@@ -35,7 +35,7 @@ public class ImagemS3Adapter implements ImagemS3Client{
 	}
 	
 	@Override
-	public byte[] recuperarFotoPerfil(Long idUsuario) {
+	public byte[] recuperarFotoPerfil(String idUsuario) {
 		String objectKey = "usuarios/" + idUsuario + "/foto_perfil.jpg";
         GetObjectRequest request = GetObjectRequest.builder()
                 .bucket(bucketName)

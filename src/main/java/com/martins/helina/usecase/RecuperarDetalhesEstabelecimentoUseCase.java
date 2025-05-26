@@ -2,9 +2,9 @@ package com.martins.helina.usecase;
 
 import org.springframework.stereotype.Service;
 
-import com.martins.helina.adapter.db.EstabelecimentoDBClient;
 import com.martins.helina.controller.dto.EstabelecimentoDTO;
 import com.martins.helina.exception.ObjectNotFoundException;
+import com.martins.helina.service.EstabelecimentoService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,9 +12,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RecuperarDetalhesEstabelecimentoUseCase {
 	
-	private final EstabelecimentoDBClient dbClient;
-	public EstabelecimentoDTO execute(Long idEstabelecimento) throws ObjectNotFoundException {
-		return dbClient.recuperarEstabelecimento(idEstabelecimento);
+	private final EstabelecimentoService service;
+	public EstabelecimentoDTO execute(String idEstabelecimento) throws ObjectNotFoundException {
+		var estab = service.buscarPorId(idEstabelecimento);
+		return estab;
 		
 	}
 }

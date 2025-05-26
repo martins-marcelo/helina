@@ -12,7 +12,7 @@ public class RecuperarImagemUseCase {
 	
 	private final ImagemS3Adapter imagemAdapter;
 	
-	public byte[] execute(Long idUsuario) {
+	public byte[] execute(String idUsuario) {
 		return imagemAdapter.recuperarFotoPerfil(idUsuario);
 	}
 }

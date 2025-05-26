@@ -1,5 +1,6 @@
 package com.martins.helina.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,13 +34,13 @@ public class UsuarioController {
 	private final RecuperarImagemUseCase recuperarImagemUseCase;
 	
 	@PostMapping("/cadastrar")
-	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@RequestBody UsuarioDTO usuarioDTO) throws Exception {
-		UsuarioDTO usuarioCadastrado = cadastrarUsuarioUseCase.execute(usuarioDTO);
-		return ResponseEntity.ok().body(usuarioCadastrado);
+	public ResponseEntity<Void> cadastrarUsuario(@RequestBody UsuarioDTO usuarioDTO) throws Exception {
+		cadastrarUsuarioUseCase.execute(usuarioDTO);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	@GetMapping("/detalhes/{idUsuario}")
-	public ResponseEntity<UsuarioDTO> recuperarDetalhesUsuario(@PathVariable Long idUsuario){
+	public ResponseEntity<UsuarioDTO> recuperarDetalhesUsuario(@PathVariable String idUsuario){
 		UsuarioDTO usuarioDetalhado = recuperarDetalhesUsuarioUseCase.execute(idUsuario);
 		return ResponseEntity.ok().body(usuarioDetalhado);
 	}
@@ -50,7 +51,7 @@ public class UsuarioController {
     }
 
     @GetMapping(value = "/recuperar-imagem", produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] recuperarFotoPerfil(@PathVariable Long id) {
+    public byte[] recuperarFotoPerfil(@PathVariable String id) {
         return recuperarImagemUseCase.execute(id);
     }
 	

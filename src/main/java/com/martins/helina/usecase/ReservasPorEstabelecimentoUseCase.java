@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.martins.helina.adapter.db.EstabelecimentoDBClient;
-import com.martins.helina.adapter.db.ReservaDBClient;
 import com.martins.helina.controller.dto.EstabelecimentoDTO;
 import com.martins.helina.controller.dto.ReservaDTO;
+import com.martins.helina.service.EstabelecimentoService;
+import com.martins.helina.service.ReservaService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,15 +15,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReservasPorEstabelecimentoUseCase {
 
-	private final EstabelecimentoDBClient estabelecimentoClient;
-	private final ReservaDBClient reservaDBClient;
-
+	private final EstabelecimentoService estabelecimentoService;
+	private final ReservaService reservaService;
 	
-	public List<ReservaDTO> execute(Long idEstabelecimento) throws Exception{
+	public List<ReservaDTO> execute(String idEstabelecimento) throws Exception{
 		
-		EstabelecimentoDTO estabelecimento = estabelecimentoClient.recuperarEstabelecimento(idEstabelecimento);
+		EstabelecimentoDTO estabelecimento = estabelecimentoService.buscarPorId(idEstabelecimento);
 		if(estabelecimento != null)
-			return reservaDBClient.recuperarReservasPorEstabelecimento(idEstabelecimento);
+			return reservaService.buscarReservasPorIdEstabelecimento(idEstabelecimento);
 		return null;
 		
 	}

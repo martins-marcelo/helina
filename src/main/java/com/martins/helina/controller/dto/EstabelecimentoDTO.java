@@ -8,23 +8,17 @@ import lombok.Data;
 @Data @Builder
 public class EstabelecimentoDTO {
 	
-	private Long idEstabelecimento;
+    private String id;
+    private String cnpj;
+    private String razaoSocial;
+    private String nomeFantasia;
+    private String tipoReserva;
+    private Integer totalVagas;
+    private Boolean reservaAutomatica;
 	
-	private String cnpj;
-	
-	private String razaoSocial;
-	
-	private String nomeFantasia;
-	
-	private String tipoReserva;
-	
-	private CardapioDTO cardapio;
-	
-	private List<CronogramaDTO> diasAbertura;
-	
+	private CardapioDTO cardapio;	
+	private List<CronogramaDTO> diasAbertura;	
 	private EnderecoDTO endereco;
-	
-	private Integer totalVagas;
-
-	
+    private List<ReservaDTO> reservas;
+		
 }

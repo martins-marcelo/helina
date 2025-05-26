@@ -1,17 +1,15 @@
-package com.martins.helina.adapter.db.domain.mapper;
+package com.martins.helina.domain.mapper;
 
 import java.util.stream.Collectors;
 
-import com.martins.helina.adapter.db.domain.Cardapio;
 import com.martins.helina.controller.dto.CardapioDTO;
+import com.martins.helina.domain.Cardapio;
 
 public class CardapioMapper {
 
 	public static Cardapio fromDTOToEntity(CardapioDTO cardapioDTO) {
 		return Cardapio.builder()
-				.idCardapio(cardapioDTO.getIdCardapio())
-				.idEstabelecimento(cardapioDTO.getIdEstabelecimento())
-				.itensCardapio(cardapioDTO.getItensCardapio().stream()
+				.itens(cardapioDTO.getItens().stream()
 						.map(ItemCardapioMapper::fromDTOToEntity)
 						.collect(Collectors.toList()))
 				.build();
@@ -19,9 +17,7 @@ public class CardapioMapper {
 
 	public static CardapioDTO fromEntityToDTO(Cardapio cardapio) {
 		return CardapioDTO.builder()
-				.idCardapio(cardapio.getIdCardapio())
-				.idEstabelecimento(cardapio.getIdEstabelecimento())
-				.itensCardapio(cardapio.getItensCardapio().stream()
+				.itens(cardapio.getItens().stream()
 						.map(ItemCardapioMapper::fromEntityToDTO)
 						.collect(Collectors.toList()))
 				.build();

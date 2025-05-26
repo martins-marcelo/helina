@@ -2,6 +2,7 @@ package com.martins.helina.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,13 +39,13 @@ public class EstabelecimentoController {
 	private final RecuperarImagemEstabelecimentoUseCase recuperarImagemEstabelecimentoUseCase;
 
 	@PostMapping("/cadastrar")
-	public ResponseEntity<EstabelecimentoDTO> cadastrarEstabelecimento(@RequestBody EstabelecimentoDTO estabelecimentoDTO) {
-		var estabelecimentoCadastrado = cadastrarEstabelecimentoUseCase.execute(estabelecimentoDTO);
-		return ResponseEntity.ok().body(estabelecimentoCadastrado);
+	public ResponseEntity<Void> cadastrarEstabelecimento(@RequestBody EstabelecimentoDTO estabelecimentoDTO) {
+		cadastrarEstabelecimentoUseCase.execute(estabelecimentoDTO);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	@GetMapping("/detalhes/{idEstabelecimento}")
-	public ResponseEntity<EstabelecimentoDTO> recuperarDetalhesEstabelecimento(@PathVariable Long idEstabelecimento) throws ObjectNotFoundException {
+	public ResponseEntity<EstabelecimentoDTO> recuperarDetalhesEstabelecimento(@PathVariable String idEstabelecimento) throws ObjectNotFoundException {
 		var estabelecimentoDetalhado = recuperarDetalhesEstabelecimentoUseCase.execute(idEstabelecimento);
 		return ResponseEntity.ok().body(estabelecimentoDetalhado);
 	}

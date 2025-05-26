@@ -1,25 +1,28 @@
-package com.martins.helina.adapter.db.domain.mapper;
+package com.martins.helina.domain.mapper;
 
-import com.martins.helina.adapter.db.domain.Usuario;
 import com.martins.helina.controller.dto.UsuarioDTO;
+import com.martins.helina.domain.Usuario;
 
 public class UsuarioMapper {
 
 	public static Usuario fromDTOToEntity(UsuarioDTO usuarioDTO) {
 		return Usuario.builder()
-				.idUsuario(usuarioDTO.getIdUsuario())
-				.emailUsuario(usuarioDTO.getEmailUsuario())
+				.id(usuarioDTO.getId())
+				.email(usuarioDTO.getEmail())
 				.endereco(EnderecoMapper.fromDTOToEntity(usuarioDTO.getEndereco()))
-				.nomeUsuario(usuarioDTO.getNomeUsuario())
+				.nome(usuarioDTO.getNome())
+				.telefone(usuarioDTO.getTelefone())
+				.senha(usuarioDTO.getSenha())
 				.build();
 	}
 
 	public static UsuarioDTO fromEntityToDTO(Usuario usuario) {
 		return UsuarioDTO.builder()
-				.emailUsuario(usuario.getEmailUsuario())
+				.email(usuario.getEmail())
 				.endereco(EnderecoMapper.fromEntityToDTO(usuario.getEndereco()))
-				.idUsuario(usuario.getIdUsuario())
-				.nomeUsuario(usuario.getNomeUsuario())
+				.id(usuario.getId())
+				.nome(usuario.getNome())
+				.telefone(usuario.getTelefone())
 				.build();
 	}
 

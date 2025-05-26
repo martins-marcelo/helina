@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.martins.helina.adapter.db.EstabelecimentoDBClient;
 import com.martins.helina.controller.dto.EstabelecimentoDTO;
+import com.martins.helina.service.EstabelecimentoService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,11 +13,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RecuperarEstabelecimentosUseCase {
 	
-	private final EstabelecimentoDBClient estabelecimentoDBClient;
+	private final EstabelecimentoService service;
 	
 	public List<EstabelecimentoDTO> execute() {
 		
-		return estabelecimentoDBClient.listarEstabelecimentos();
+		return service.listarTodos();
 		
 	}
 }
