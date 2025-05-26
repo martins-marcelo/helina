@@ -29,7 +29,7 @@ public class Estabelecimento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEstabelecimento;
 	
-	private Long cnpj;
+	private String cnpj;
 	
 	private String razaoSocial;
 	

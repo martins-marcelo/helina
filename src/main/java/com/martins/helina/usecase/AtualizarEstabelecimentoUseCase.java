@@ -15,7 +15,7 @@ public class AtualizarEstabelecimentoUseCase {
 	private final EstabelecimentoDBClient estabelecimentoDBClient;
 	
 	public EstabelecimentoDTO execute(EstabelecimentoDTO estabelecimentoDTO) throws ObjectNotFoundException{
-		return null;
+		return estabelecimentoDBClient.atualizarEstabelecimento(estabelecimentoDTO);
 	}
 
 }

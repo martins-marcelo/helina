@@ -51,6 +51,4 @@ public class Usuario {
 	private Set<Integer> perfis;
 	
 	
-	
-	
 }

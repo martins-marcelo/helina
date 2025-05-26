@@ -19,9 +19,12 @@ public class UsuarioDBAdapter implements UsuarioDBClient{
 	private final UsuarioRepository usuarioRepository;
 	
 	@Override
-	public UsuarioDTO inserirUsuario(UsuarioDTO usuarioDTO) {
-		Usuario usuario = usuarioRepository.save(UsuarioMapper.fromDTOToEntity(usuarioDTO));
-		return UsuarioMapper.fromEntityToDTO(usuario);
+	public UsuarioDTO inserirUsuario(UsuarioDTO usuarioDTO) throws Exception{
+		Optional<Usuario> usuario = usuarioRepository.findByEmailUsuario(usuarioDTO.getEmailUsuario());
+		if(usuario.isPresent())
+			throw new Exception("Usuário já cadastrado");
+		Usuario usuarioCadastrar = usuarioRepository.save(UsuarioMapper.fromDTOToEntity(usuarioDTO));
+		return UsuarioMapper.fromEntityToDTO(usuarioCadastrar);
 	}
 
 	@Override

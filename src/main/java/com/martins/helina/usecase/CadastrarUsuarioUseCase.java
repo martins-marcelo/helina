@@ -13,7 +13,7 @@ public class CadastrarUsuarioUseCase {
 	
 	private final UsuarioDBClient usuarioClient;
 	
-	public UsuarioDTO execute(UsuarioDTO usuarioDTO) {
+	public UsuarioDTO execute(UsuarioDTO usuarioDTO) throws Exception {
 		return usuarioClient.inserirUsuario(usuarioDTO);
 		
 	}

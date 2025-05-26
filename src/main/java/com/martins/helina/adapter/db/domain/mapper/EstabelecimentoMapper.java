@@ -6,6 +6,10 @@ import com.martins.helina.adapter.db.domain.Estabelecimento;
 import com.martins.helina.entrypoint.dto.EstabelecimentoDTO;
 
 public class EstabelecimentoMapper {
+	
+	private EstabelecimentoMapper() {
+		throw new IllegalStateException("Mapper class");
+	}
 
 	public static Estabelecimento fromDTOToEntity(EstabelecimentoDTO estabelecimentoDTO) {
 		return Estabelecimento.builder()

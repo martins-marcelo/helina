@@ -13,4 +13,6 @@ public interface EstabelecimentoDBClient {
 	
 	EstabelecimentoDTO cadastrarEstabelecimento(EstabelecimentoDTO estabelecimentoDTO);
 	
+	EstabelecimentoDTO atualizarEstabelecimento(EstabelecimentoDTO estabelecimentoDTO);
+	
 }

@@ -33,7 +33,7 @@ public class UsuarioController {
 	private final RecuperarImagemUseCase recuperarImagemUseCase;
 	
 	@PostMapping("/cadastrar")
-	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@RequestBody UsuarioDTO usuarioDTO){
+	public ResponseEntity<UsuarioDTO> cadastrarUsuario(@RequestBody UsuarioDTO usuarioDTO) throws Exception {
 		UsuarioDTO usuarioCadastrado = cadastrarUsuarioUseCase.execute(usuarioDTO);
 		return ResponseEntity.ok().body(usuarioCadastrado);
 	}

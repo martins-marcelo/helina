@@ -9,12 +9,21 @@ import javax.persistence.Id;
 
 import com.martins.helina.entrypoint.dto.enums.StatusReservaEnum;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Entity @Builder @Getter @Setter
+@Entity
+@Builder
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reserva {
 	
 	@Id

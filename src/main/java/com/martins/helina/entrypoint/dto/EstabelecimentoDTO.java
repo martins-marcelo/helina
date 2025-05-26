@@ -10,7 +10,7 @@ public class EstabelecimentoDTO {
 	
 	private Long idEstabelecimento;
 	
-	private Long cnpj;
+	private String cnpj;
 	
 	private String razaoSocial;
 	

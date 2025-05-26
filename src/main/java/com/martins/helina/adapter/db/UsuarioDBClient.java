@@ -5,7 +5,7 @@ import com.martins.helina.exceptions.ObjectNotFoundException;
 
 public interface UsuarioDBClient {
 	
-	UsuarioDTO inserirUsuario(UsuarioDTO usuarioDTO);
+	UsuarioDTO inserirUsuario(UsuarioDTO usuarioDTO) throws Exception;
 	
 	UsuarioDTO recuperarDetalhesUsuario(Long idUsuario) throws ObjectNotFoundException;
 }
