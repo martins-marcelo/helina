@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: helina
+  profiles:
+    active: prod
+  cloud:
+    aws:
+      region:
+        static: sa-east-1
+      credentials:
+        accessKey: ${aws.access-key}
+        secretKey: ${aws.secret-key}
+
+jwt:
+  secret: ${jwt.secret}
+
+aws:
+  s3:
+    bucket-name: ${s3.bucket-name}
+  sns:
+    topic-arn: ${sns.topic-arn}

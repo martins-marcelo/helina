@@ -1,23 +1,25 @@
 aws:
-  accessKeyId: 
-  secretAccessKey: 
   region: sa-east-1
-s3:
-  bucketName: usuario-profile-picture
-spring:
-  datasource:
-    password: root
-    url: jdbc:postgresql://localhost:5432/oqtph
-    username: root
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-topic:
-  arn: arn:aws:sns:sa-east-1:817161028136:notifica-reserva
+  access-key: test
+  secret-key: test
+
+  dynamodb:
+    endpoint: http://localhost:4566
+    region: sa-east-1
+
+  s3:
+    bucket-name: usuario-profile-picture
+
+  sns:
+    topic-arn: arn:aws:sns:sa-east-1:000000000000:notifica-reserva
+
 jwt:
-   secret: Nã0èT3mid0K1Qu3r0S3r,ES1MD31xaDoEmP4z
-   expiration: 60000
+  secret: Úh0WemNNA4Str1àÇda
+  expiration: 60000
+
+spring:
+  profiles:
+    active: local
+
+  application:
+    name: helina

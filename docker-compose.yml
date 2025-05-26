@@ -1,38 +1,34 @@
 version: '3.8'
 
 services:
-  helina:
-    build: .
-    container_name: helina-api
+  
+  dynamodb-local:
+    image: amazon/dynamodb-local
+    container_name: dynamodb_local
     ports:
-      - "8080:8080"
-    depends_on:
-      - db
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/helina
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-    networks:
-      - helina-network
-
-  db:
-    image: postgres:16
-    container_name: helina-db
-    restart: always
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_DB: oqtph
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
+      - "8000:8000"
+    command: -jar DynamoDBLocal.jar -sharedDb
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - ./data/dynamodb:/home/dynamodblocal/data
     networks:
       - helina-network
 
-volumes:
-  postgres-data:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack
+    ports:
+      - "4566:4566" # Porta principal dos serviços da AWS simulados
+    environment:
+      - SERVICES=s3,sns,ssm,secretsmanager
+      - DEFAULT_REGION=sa-east-1
+      - EDGE_PORT=4566
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - ./data/localstack:/tmp/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - helina-network
 
 networks:
   helina-network:
+    driver: bridge
