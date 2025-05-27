@@ -16,11 +16,11 @@ import jakarta.servlet.http.HttpServletResponse;
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
 	private JWTUtil jwtUtil;
-	private UserDetailsService userDetailService;
+	private UserDetailsService userDetailsService;
 	
-	public JWTAuthorizationFilter(JWTUtil jwtUtil, UserDetailsService userDetailService) {
+	public JWTAuthorizationFilter(JWTUtil jwtUtil, UserDetailsService userDetailsService) {
 		this.jwtUtil = jwtUtil;
-		this.userDetailService = userDetailService;
+		this.userDetailsService = userDetailsService;
 	}
 	
 	@Override
@@ -29,25 +29,17 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 									FilterChain chain) throws IOException, ServletException{
 		
 		String header = request.getHeader("Authorization");
-		if(header != null && header.startsWith("Bearer ")) {
-			UsernamePasswordAuthenticationToken auth = getAuthentication(header.substring(7));
-			if(auth != null) {
-				SecurityContextHolder.getContext().setAuthentication(auth);
-			}
-		}
+		if (header != null && header.startsWith("Bearer ")) {
+            String token = header.substring(7);
+            if (jwtUtil.tokenValido(token)) {
+                String username = jwtUtil.getUsername(token);
+                UserDetails user = userDetailsService.loadUserByUsername(username);
+                UsernamePasswordAuthenticationToken authentication = 
+                        new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        }
 		chain.doFilter(request, response);
-	}
-	
-	
-	private UsernamePasswordAuthenticationToken getAuthentication(String token) {
-		if(jwtUtil.tokenValido(token)) {
-			String username = jwtUtil.getUsername(token);
-			if(username != null){
-				UserDetails user = userDetailService.loadUserByUsername(username);
-				return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-			}
-		}
-		return null;
 	}
 	
 	

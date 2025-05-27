@@ -2,17 +2,18 @@ package com.martins.helina.adapter.s3;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.martins.helina.config.SecretsManagerService;
+import com.martins.helina.exception.ImagemNaoEncontradaException;
 
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.NoSuchKeyException;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.S3Exception;
 
 @Service
 public class ImagemS3Adapter implements ImagemS3Client{
@@ -35,42 +36,45 @@ public class ImagemS3Adapter implements ImagemS3Client{
 	}
 	
 	@Override
-	public byte[] recuperarFotoPerfil(String idUsuario) {
-		String objectKey = "usuarios/" + idUsuario + "/foto_perfil.jpg";
+    public byte[] recuperarFotoPerfil(String idUsuario) throws ImagemNaoEncontradaException, RuntimeException{
+        String objectKey = "usuarios/" + idUsuario + "/foto_perfil.jpg";
         GetObjectRequest request = GetObjectRequest.builder()
                 .bucket(bucketName)
                 .key(objectKey)
                 .build();
-        Path fotoPerfilPath;
+
         try {
-            fotoPerfilPath = Files.createTempFile("foto_perfil", ".jpg");
-            s3Client.getObject(request, fotoPerfilPath);
-            byte[] fotoPerfilBytes = Files.readAllBytes(fotoPerfilPath);
-            Files.delete(fotoPerfilPath);
-            return fotoPerfilBytes;
-        } catch (IOException e) {
-           e.printStackTrace();
+            return s3Client.getObjectAsBytes(request).asByteArray();
+        } catch (NoSuchKeyException e) {
+            throw new ImagemNaoEncontradaException(
+                String.format("Imagem não encontrada para o usuário: %s", idUsuario)
+            );
+        } catch (S3Exception e) {
+            throw new RuntimeException("Erro ao acessar S3: " + e.awsErrorDetails().errorMessage(), e);
         }
-        return null;
-	}
+    }
 
 	@Override
-	public byte[] recuperarImagemEstabelecimento(Long idEstabelecimento, Boolean isBanner) {
-		var nameFile = isBanner ? "banner" : "icon";
-		String objectKey = "estabelecimentos/" + idEstabelecimento + "/" + nameFile + ".jpg";
+    public byte[] recuperarImagemEstabelecimento(Long idEstabelecimento, Boolean isBanner) {
+        String nameFile = isBanner ? "banner" : "icon";
+        String objectKey = "estabelecimentos/" + idEstabelecimento + "/" + nameFile + ".jpg";
+
         GetObjectRequest request = GetObjectRequest.builder()
                 .bucket(bucketName)
                 .key(objectKey)
                 .build();
+
         try {
-            var resp = s3Client.getObject(request);
-            byte[] fotoPerfilBytes = resp.readAllBytes();
-            return fotoPerfilBytes;
+            var response = s3Client.getObject(request);
+            return response.readAllBytes();
+        } catch (software.amazon.awssdk.services.s3.model.NoSuchKeyException e) {
+            throw new ImagemNaoEncontradaException(
+                String.format("Imagem '%s' do estabelecimento de id %d não encontrada.", nameFile, idEstabelecimento)
+            );
         } catch (IOException e) {
-           e.printStackTrace();
+            throw new RuntimeException("Erro ao processar a imagem do estabelecimento.", e);
         }
-        return null;
-	}
+    }
 	
 	
 	

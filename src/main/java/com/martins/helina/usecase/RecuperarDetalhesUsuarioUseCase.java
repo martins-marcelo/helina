@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.martins.helina.adapter.s3.ImagemS3Client;
 import com.martins.helina.controller.dto.UsuarioDTO;
+import com.martins.helina.exception.ImagemNaoEncontradaException;
 import com.martins.helina.service.UsuarioService;
 
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,12 @@ public class RecuperarDetalhesUsuarioUseCase {
 	
 	public UsuarioDTO execute(String idUsuario) {
 		var usuarioDTO = usuarioService.buscarPorId(idUsuario);
-		usuarioDTO.setFotoPerfil(imagemS3Client.recuperarFotoPerfil(idUsuario));
+		try{
+			usuarioDTO.setFotoPerfil(imagemS3Client.recuperarFotoPerfil(idUsuario));
+		}
+		catch(ImagemNaoEncontradaException inee) {
+			usuarioDTO.setFotoPerfil(null);
+		}
 		return usuarioDTO;
 		
 	}

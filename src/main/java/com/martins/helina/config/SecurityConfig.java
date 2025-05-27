@@ -16,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -46,6 +47,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationConfiguration authenticationConfiguration) throws Exception {
 
         AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
+        JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(authenticationManager, jwtUtil);
+        jwtAuthenticationFilter.setFilterProcessesUrl("/login");
 
         if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
             http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
@@ -60,10 +63,10 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .authenticationManager(authenticationManager)
-            .addFilter(new JWTAuthenticationFilter(authenticationManager, jwtUtil))
+            .addFilter(jwtAuthenticationFilter)
             .addFilterBefore(
                 new JWTAuthorizationFilter(jwtUtil, userDetailsService),
-                JWTAuthenticationFilter.class
+                UsernamePasswordAuthenticationFilter.class
             );
 
         return http.build();
@@ -82,7 +85,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("*")); // Ou especifique domínio(s) ex.: List.of("https://meusite.com")
+        configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
