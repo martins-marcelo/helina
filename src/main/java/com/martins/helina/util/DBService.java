@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.martins.helina.controller.dto.enums.Perfil;
 import com.martins.helina.domain.Endereco;
+import com.martins.helina.domain.Estabelecimento;
 import com.martins.helina.domain.Usuario;
+import com.martins.helina.repository.EstabelecimentoRepository;
 import com.martins.helina.repository.UsuarioRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class DBService {
 	
 	@Autowired
 	private UsuarioRepository userRepo;
+
+	@Autowired
+	private EstabelecimentoRepository estabRepo;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
@@ -40,6 +45,13 @@ public class DBService {
 		Optional<Usuario> verify = userRepo.findByEmail(u0.getEmail());
 		if(verify.isEmpty())
 			userRepo.save(u0);
+
+		Estabelecimento e0 = Estabelecimento.builder()
+			.cnpj("1231232132")
+			.nomeFantasia("Fantasia Fantastica")
+			.razaoSocial("Razao racional")
+			.build();
+		estabRepo.save(e0);
 	}
 
 }

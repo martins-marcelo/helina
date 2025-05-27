@@ -14,11 +14,13 @@ import com.martins.helina.domain.Usuario;
 import com.martins.helina.repository.UsuarioRepository;
 import com.martins.helina.security.UserSS;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService{
 	
-	@Autowired
-	private UsuarioRepository repo;
+	private final UsuarioRepository repo;
 	
 	
 	@Override

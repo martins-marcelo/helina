@@ -2,8 +2,9 @@ package com.martins.helina.security;
 
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import com.martins.helina.config.SecretsManagerService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,11 +13,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JWTUtil {
 	
-	@Value("${jwt.secret}")
-	private String secret;
-	
-	@Value("${jwt.expiration}")
+	private String secret;	
 	private Long expiration;
+
+	public JWTUtil(SecretsManagerService secretsManagerService) {
+        this.secret = secretsManagerService.getSecretValue("JWT_SECRET");
+        String expirationStr = secretsManagerService.getSecretValue("JWT_EXPIRATION");
+        this.expiration = Long.parseLong(expirationStr);
+    }
 	
 	
 	public String generateToken(String username) {

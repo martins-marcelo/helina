@@ -20,7 +20,7 @@ public class SecretsManagerService {
 
     private Map<String, String> secrets;
 
-    private final String secretName = "/helina/app/prod";
+    private final String secretName = "helina/app/prod";
     private final Region region = Region.SA_EAST_1;
 
     @PostConstruct

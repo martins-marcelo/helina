@@ -1,7 +1,8 @@
 package com.martins.helina.adapter.sns;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.martins.helina.config.SecretsManagerService;
 
 import software.amazon.awssdk.services.sns.SnsClient;
 import software.amazon.awssdk.services.sns.model.PublishRequest;
@@ -13,11 +14,11 @@ public class ReservaSNSAdapter implements ReservaSNSClient{
 	
 	private static final String MSG_RESERVA = "Nova reserva recebida para seu estabelecimento!";
 	
-	@Value("${topic.arn}")
 	private String topicArn;
 	
-	public ReservaSNSAdapter(SNSAdapter snsAdapter) {
+	public ReservaSNSAdapter(SNSAdapter snsAdapter, SecretsManagerService secretsManagerService) {
         this.snsClient = snsAdapter.getSNSClient();
+		this.topicArn = secretsManagerService.getSecretValue("SNS_TOPIC_ARN");
     }
 	
 	@Override

@@ -3,4 +3,4 @@ spring:
     name: helina
 
   profiles:
-    active: local
+    active: prod

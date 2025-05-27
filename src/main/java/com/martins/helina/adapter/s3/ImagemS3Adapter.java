@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.martins.helina.config.SecretsManagerService;
 
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
@@ -16,13 +17,12 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 @Service
 public class ImagemS3Adapter implements ImagemS3Client{
 	
-	@Value("${s3.bucketName}")
-	private String bucketName;
-	
+	private String bucketName;	
 	private S3Client s3Client;
 	
-	public ImagemS3Adapter(S3Adapter s3Adapter) {
+	public ImagemS3Adapter(S3Adapter s3Adapter, SecretsManagerService secretsManagerService) {
         this.s3Client = s3Adapter.getS3Client();
+        this.bucketName = secretsManagerService.getSecretValue("S3_BUCKET_NAME");
     }
 	
 	@Override
