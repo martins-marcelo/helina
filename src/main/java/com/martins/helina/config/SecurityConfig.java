@@ -54,13 +54,17 @@ public class SecurityConfig {
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated()
             )
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authenticationManager(authenticationManager)
             .addFilter(new JWTAuthenticationFilter(authenticationManager, jwtUtil))
-            .addFilter(new JWTAuthorizationFilter(authenticationManager, jwtUtil, userDetailsService));
+            .addFilterBefore(
+                new JWTAuthorizationFilter(jwtUtil, userDetailsService),
+                JWTAuthenticationFilter.class
+            );
 
         return http.build();
     }
