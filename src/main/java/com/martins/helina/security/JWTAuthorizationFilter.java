@@ -2,25 +2,23 @@ package com.martins.helina.security;
 
 import java.io.IOException;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-public class JWTAuthorizationFilter extends BasicAuthenticationFilter{
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
 	private JWTUtil jwtUtil;
 	private UserDetailsService userDetailService;
 	
-	public JWTAuthorizationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, UserDetailsService userDetailService) {
-		super(authenticationManager);
+	public JWTAuthorizationFilter(JWTUtil jwtUtil, UserDetailsService userDetailService) {
 		this.jwtUtil = jwtUtil;
 		this.userDetailService = userDetailService;
 	}
@@ -44,8 +42,10 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter{
 	private UsernamePasswordAuthenticationToken getAuthentication(String token) {
 		if(jwtUtil.tokenValido(token)) {
 			String username = jwtUtil.getUsername(token);
-			UserDetails user = userDetailService.loadUserByUsername(username);
-			return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+			if(username != null){
+				UserDetails user = userDetailService.loadUserByUsername(username);
+				return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+			}
 		}
 		return null;
 	}

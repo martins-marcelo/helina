@@ -29,7 +29,7 @@ public class Usuario {
         return id;
     }
 
-    @DynamoDbSecondaryPartitionKey(indexNames = {"email-index"})
+    @DynamoDbSecondaryPartitionKey(indexNames = {"gsi_email"})
     public String getEmail() {
         return email;
     }

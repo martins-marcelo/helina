@@ -18,8 +18,6 @@ jwt:
   expiration: 60000
 
 spring:
-  profiles:
-    active: local
 
   application:
     name: helina

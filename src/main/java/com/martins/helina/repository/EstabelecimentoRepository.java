@@ -16,7 +16,7 @@ public class EstabelecimentoRepository {
     private final DynamoDbEnhancedClient enhancedClient;
 
     private DynamoDbTable<Estabelecimento> getTable() {
-        return enhancedClient.table("Estabelecimento", TableSchema.fromBean(Estabelecimento.class));
+        return enhancedClient.table("he-estabelecimento", TableSchema.fromBean(Estabelecimento.class));
     }
 
     public void save(Estabelecimento estabelecimento) {

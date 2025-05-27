@@ -1,5 +1,6 @@
 package com.martins.helina.security;
 
+import java.security.Key;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
@@ -9,15 +10,17 @@ import com.martins.helina.config.SecretsManagerService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JWTUtil {
 	
-	private String secret;	
-	private Long expiration;
+	private final Key key;
+    private final Long expiration;
 
 	public JWTUtil(SecretsManagerService secretsManagerService) {
-        this.secret = secretsManagerService.getSecretValue("JWT_SECRET");
+        String secret = secretsManagerService.getSecretValue("JWT_SECRET");
+		this.key = Keys.hmacShaKeyFor(secret.getBytes());
         String expirationStr = secretsManagerService.getSecretValue("JWT_EXPIRATION");
         this.expiration = Long.parseLong(expirationStr);
     }
@@ -26,8 +29,8 @@ public class JWTUtil {
 	public String generateToken(String username) {
 		return Jwts.builder()
 				.setSubject(username)
-				.setExpiration(new Date(System.currentTimeMillis()+expiration))
-				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
+				.setExpiration(new Date(System.currentTimeMillis() + expiration))
+				.signWith(key, SignatureAlgorithm.HS512)
 				.compact();
 	}
 
@@ -47,13 +50,16 @@ public class JWTUtil {
 
 
 	private Claims getClaims(String token) {
-		try{
-			return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
-		}
-		catch(Exception e) {
-			return null;
-		}
-	}
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
 
 	public String getUsername(String token) {

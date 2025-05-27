@@ -1,7 +1,9 @@
 package com.martins.helina.service;
 
 import java.util.Optional;
+import java.util.UUID;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.martins.helina.controller.dto.UsuarioDTO;
@@ -17,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioService {
 
     private final UsuarioRepository repository;
+    private final BCryptPasswordEncoder encoder;
     
     public Boolean isUsuarioCliente(String idUsuario) {
         var usuario = repository.findById(idUsuario);
@@ -31,7 +34,8 @@ public class UsuarioService {
         if(u.isPresent())
             throw new Exception("Email já cadastrado");
         var usuario = UsuarioMapper.fromDTOToEntity(dto);
-        usuario.setId(null);
+        usuario.setSenha(encoder.encode(usuario.getSenha()));
+        usuario.setId(UUID.randomUUID().toString());
         repository.save(usuario);
     }
 

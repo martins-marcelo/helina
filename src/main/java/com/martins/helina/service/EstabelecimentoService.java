@@ -1,6 +1,7 @@
 package com.martins.helina.service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class EstabelecimentoService {
 
     public void criar(EstabelecimentoDTO dto) {
         Estabelecimento e = EstabelecimentoMapper.fromDTOToEntity(dto) ;
-        e.setId(null);
+        e.setId(UUID.randomUUID().toString());
         repository.save(e);
     }
 

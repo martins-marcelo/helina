@@ -2,6 +2,7 @@ package com.martins.helina.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class ReservaService {
 
     public void criar(ReservaDTO dto) {
         Reserva r = ReservaMapper.fromDTOToEntity(dto);
-        r.setIdReserva(null);
+        r.setIdReserva(UUID.randomUUID().toString());
         repository.save(r);
     }
 

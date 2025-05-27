@@ -22,13 +22,13 @@ public class UsuarioRepository {
     private final DynamoDbEnhancedClient enhancedClient;
 
     private DynamoDbTable<Usuario> getTable() {
-        return enhancedClient.table("Usuario", TableSchema.fromBean(Usuario.class));
+        return enhancedClient.table("he-usuario", TableSchema.fromBean(Usuario.class));
     }
 
     public Optional<Usuario> findByEmail(String email) {
         return StreamSupport.stream(
                 getTable()
-                    .index("email-index")
+                    .index("gsi_email")
                     .query(r -> r.queryConditional(QueryConditional.keyEqualTo(k -> k.partitionValue(email))))
                     .spliterator(),
                 false)

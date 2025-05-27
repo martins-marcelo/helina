@@ -1,6 +1,9 @@
 package com.martins.helina.domain.mapper;
 
+import java.util.stream.Collectors;
+
 import com.martins.helina.controller.dto.UsuarioDTO;
+import com.martins.helina.controller.dto.enums.Perfil;
 import com.martins.helina.domain.Usuario;
 
 public class UsuarioMapper {
@@ -13,6 +16,10 @@ public class UsuarioMapper {
 				.nome(usuarioDTO.getNome())
 				.telefone(usuarioDTO.getTelefone())
 				.senha(usuarioDTO.getSenha())
+				.perfis(usuarioDTO.getPerfis()
+					.stream()
+					.map(Perfil::getCodigo)
+					.collect(Collectors.toSet()))
 				.build();
 	}
 

@@ -24,12 +24,12 @@ public class Reserva {
         return idReserva;
     }
 
-    @DynamoDbSecondaryPartitionKey(indexNames = "idUsuario-index")
+    @DynamoDbSecondaryPartitionKey(indexNames = "gsi_usuario")
     public String getIdUsuario() {
         return idUsuario;
     }
 
-    @DynamoDbSecondaryPartitionKey(indexNames = "idEstabelecimento-index")
+    @DynamoDbSecondaryPartitionKey(indexNames = "gsi_estabelecimento")
     public String getIdEstabelecimento() {
         return idEstabelecimento;
     }

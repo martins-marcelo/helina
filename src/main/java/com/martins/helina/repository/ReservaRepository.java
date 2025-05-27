@@ -23,7 +23,7 @@ public class ReservaRepository {
     private final DynamoDbEnhancedClient enhancedClient;
 
     private DynamoDbTable<Reserva> getTable() {
-        return enhancedClient.table("Reserva", TableSchema.fromBean(Reserva.class));
+        return enhancedClient.table("he-reserva", TableSchema.fromBean(Reserva.class));
     }
 
     public void save(Reserva reserva) {
@@ -37,7 +37,7 @@ public class ReservaRepository {
     }
 
     public List<Reserva> findByIdUsuario(String idUsuario) {
-        DynamoDbIndex<Reserva> index = getTable().index("idUsuario-index");
+        DynamoDbIndex<Reserva> index = getTable().index("gsi_usuario");
 
         List<Reserva> reservas = new ArrayList<>();
 
@@ -49,7 +49,7 @@ public class ReservaRepository {
     }
 
     public List<Reserva> findByIdEstabelecimento(String idEstabelecimento) {
-        DynamoDbIndex<Reserva> index = getTable().index("idEstabelecimento-index");
+        DynamoDbIndex<Reserva> index = getTable().index("gsi_estabelecimento");
 
         List<Reserva> reservas = new ArrayList<>();
 

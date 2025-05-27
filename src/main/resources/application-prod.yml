@@ -1,8 +1,6 @@
 spring:
   application:
     name: helina
-  profiles:
-    active: prod
   cloud:
     aws:
       region:

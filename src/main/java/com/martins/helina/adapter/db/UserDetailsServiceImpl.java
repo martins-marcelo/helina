@@ -1,9 +1,9 @@
 package com.martins.helina.adapter.db;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,16 +25,20 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Optional<Usuario> usuario = repo.findByEmail(email);
-		if(usuario.isEmpty()) {
-			throw new UsernameNotFoundException(email);
-		}
-		var perfis = usuario.get().getPerfis().stream()
-				.map(x -> 
-					Perfil.toEnum(x))
-				.collect(Collectors.toSet());
+		Usuario usuario = repo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com email: " + email));
 		
-		return new UserSS(usuario.get().getId(), usuario.get().getEmail(), usuario.get().getSenha(), perfis);
+		Set<Perfil> perfis = Optional.ofNullable(usuario.getPerfis())
+                .orElse(Set.of())
+                .stream()
+                .map(Perfil::toEnum)
+                .collect(Collectors.toSet());
+		
+		return new UserSS(
+                usuario.getId(),
+                usuario.getEmail(),
+                usuario.getSenha(),
+                perfis
+        );
 	}
 
 }
