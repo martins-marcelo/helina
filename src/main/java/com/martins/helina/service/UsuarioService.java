@@ -29,7 +29,7 @@ public class UsuarioService {
         return false;
     }
 
-    public void criar(UsuarioDTO dto) throws Exception {
+    public UsuarioDTO criar(UsuarioDTO dto) throws Exception {
         Optional<Usuario> u = repository.findByEmail(dto.getEmail());
         if(u.isPresent())
             throw new Exception("Email já cadastrado");
@@ -37,6 +37,8 @@ public class UsuarioService {
         usuario.setSenha(encoder.encode(usuario.getSenha()));
         usuario.setId(UUID.randomUUID().toString());
         repository.save(usuario);
+        dto.setId(usuario.getId());
+        return dto;
     }
 
     public UsuarioDTO buscarPorId(String id) {

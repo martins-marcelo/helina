@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data @Builder
 public class UsuarioDTO {
-
+    
 	private String id;
     private String nome;
     private String email;

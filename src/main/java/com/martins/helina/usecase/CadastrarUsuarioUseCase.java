@@ -14,7 +14,6 @@ public class CadastrarUsuarioUseCase {
 	private final UsuarioService service;
 	
 	public void execute(UsuarioDTO usuarioDTO) throws Exception {
-		service.criar(usuarioDTO);
-		
+		usuarioDTO = service.criar(usuarioDTO);		
 	}
 }
